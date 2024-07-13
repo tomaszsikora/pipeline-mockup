@@ -5,10 +5,10 @@ const TopNavBar = () => {
     <nav className="bg-slate-700 text-white p-2 flex items-center">
       <button className="mr-4 text-xl">☰</button>
       <span className="font-bold text-xl mr-6">SPINNAKER</span>
-      <a href="#" className="mx-3 text-sm">Search</a>
-      <a href="#" className="mx-3 text-sm">Projects</a>
-      <a href="#" className="mx-3 text-sm">Applications</a>
-      <a href="#" className="mx-3 text-sm">Pipeline Templates</a>
+      <span className="font-bold text-xl mr-6">Search</span>
+      <span className="font-bold text-xl mr-6">Projects</span>
+      <span className="font-bold text-xl mr-6">Applications</span>
+      <span className="font-bold text-xl mr-6">Pipeline Templates</span>
       <div className="flex-grow"></div>
       <div className="relative">
         <input 
