@@ -1,0 +1,162 @@
+{
+  "name": "production",
+  "trigger": "enabled",
+  "executions": [
+    {
+      "id": 1,
+      "status": "FAILED",
+      "startTime": "about 1 hour ago",
+      "duration": "15:02",
+      "stages": [
+        { "id": "s1", "name": "Buddy", "status": "SUCCEEDED", "duration": "00:13" },
+        {
+          "id": "s2",
+          "dependsOn": ["s1"],
+          "name": "production-deploy-pod26",
+          "status": "FAILED",
+          "duration": "11:18",
+          "roles": [
+            {
+              "name": "app-service.yaml",
+              "status": "Failed",
+              "count": "3/4",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service", "status": "Synced" },
+                { "kind": "Service", "name": "app-service", "status": "Synced" },
+                { "kind": "Ingress", "name": "app-service", "status": "Synced" },
+                { "kind": "ConfigMap", "name": "app-serivce-conf", "status": "Degraded" }
+              ]
+            },
+            {
+              "name": "app-service-2.yaml",
+              "status": "Synced",
+              "count": "2/2",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service-2", "status": "Synced" },
+                { "kind": "Service", "name": "app-service-2", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "console",
+              "status": "Synced",
+              "count": "1/1",
+              "resources": [{ "kind": "Pod", "name": "console", "status": "Synced" }]
+            }
+          ]
+        },
+        { "id": "s3", "name": "Phase 2: Production Canary on demand smoke tests", "status": "NOT_STARTED", "duration": "00:00", "dependsOn": ["s2"] },
+        { "id": "s4", "name": "Phase Succeeded", "status": "NOT_STARTED", "duration": "00:00", "dependsOn": ["s3"] },
+        { "id": "s5", "name": "Soak time before Phase 3: Production", "status": "NOT_STARTED", "duration": "00:00", "dependsOn": ["s4"] },
+        {
+          "id": "s6",
+          "name": "pod13",
+          "status": "NOT_STARTED",
+          "duration": "00:00",
+          "dependsOn": ["s5"],
+          "roles": [
+            {
+              "name": "app-service.yaml",
+              "status": "Synced",
+              "count": "3/3",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service", "status": "Synced" },
+                { "kind": "Service", "name": "app-service", "status": "Synced" },
+                { "kind": "Ingress", "name": "app-service", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "app-service-2.yaml",
+              "status": "Synced",
+              "count": "2/2",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service-2", "status": "Synced" },
+                { "kind": "Service", "name": "app-service-2", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "console",
+              "status": "Synced",
+              "count": "1/1",
+              "resources": [{ "kind": "Pod", "name": "console", "status": "Synced" }]
+            }
+          ]
+        },
+        {
+          "id": "s7",
+          "name": "pod15",
+          "status": "NOT_STARTED",
+          "duration": "00:00",
+          "dependsOn": ["s5"],
+          "roles": [
+            {
+              "name": "app-service.yaml",
+              "status": "Synced",
+              "count": "3/3",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service", "status": "Synced" },
+                { "kind": "Service", "name": "app-service", "status": "Synced" },
+                { "kind": "Ingress", "name": "app-service", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "app-service-2.yaml",
+              "status": "Synced",
+              "count": "2/2",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service-2", "status": "Synced" },
+                { "kind": "Service", "name": "app-service-2", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "console",
+              "status": "Synced",
+              "count": "1/1",
+              "resources": [{ "kind": "Pod", "name": "console", "status": "Synced" }]
+            }
+          ]
+        },
+        {
+          "id": "s8",
+          "name": "pod30",
+          "status": "NOT_STARTED",
+          "duration": "00:00",
+          "dependsOn": ["s5"],
+          "roles": [
+            {
+              "name": "app-service.yaml",
+              "status": "Synced",
+              "count": "3/3",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service", "status": "Synced" },
+                { "kind": "Service", "name": "app-service", "status": "Synced" },
+                { "kind": "Ingress", "name": "app-service", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "app-service-2.yaml",
+              "status": "Synced",
+              "count": "2/2",
+              "resources": [
+                { "kind": "Deployment", "name": "app-service-2", "status": "Synced" },
+                { "kind": "Service", "name": "app-service-2", "status": "Synced" }
+              ]
+            },
+            {
+              "name": "console",
+              "status": "Synced",
+              "count": "1/1",
+              "resources": [{ "kind": "Pod", "name": "console", "status": "Synced" }]
+            }
+          ]
+        },
+        {
+          "id": "s9",
+          "name": "Phase 3: Production on demand smoke tests",
+          "status": "NOT_STARTED",
+          "duration": "00:00",
+          "dependsOn": ["s6", "s7", "s8"]
+        }
+      ]
+    }
+  ]
+}
